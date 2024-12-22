@@ -2,10 +2,10 @@
 
 namespace BaekJoon {
     public class Q1003 {
-        public static void Main() {
+        public void Main() {
             int testCase = int.Parse(Console.ReadLine());
-            
-            for(int i = 0;  i < testCase;i++) {
+
+            for (int i = 0; i < testCase; i++) {
                 int fiboN = int.Parse(Console.ReadLine());
                 int countOne = 0;
                 int countZero = 0;
@@ -13,14 +13,14 @@ namespace BaekJoon {
                 if (fiboN != 1) countZero = 1;
                 for (int j = 0; j < fiboN; j++) countOne++;
 
-                Console.WriteLine($"{countZero} {countOne}");   
+                Console.WriteLine($"{countZero} {countOne}");
             }
         }
     }
     public class Q1002 {
         private static Q1002 Ins;
 
-        public static void Main() {
+        public void Main() {
             Ins = new Q1002();
 
             int testCase = int.Parse(Console.ReadLine());
@@ -43,7 +43,7 @@ namespace BaekJoon {
             int distance = (int)GetDistance((points[0], points[1]), (points[3], points[4]));
             int r1 = points[2];
             int r2 = points[5];
-            
+
             int sum = r1 + r2;
             int dif = r1 > r2 ? r1 - r2 : r2 - r1;
 

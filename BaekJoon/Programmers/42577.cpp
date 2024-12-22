@@ -1,37 +1,56 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <algorithm>
 #include <unordered_map>
 using namespace std;
 
-bool compareByLength(const string& a, const string& b) {
-	return a.size() < b.size();  // 길이가 작은 것부터 오름차순 정렬
-}
+class TrieNode {
+public:
+	unordered_map<char, TrieNode*> child;
+};
 
-bool solution_42577(vector<string> phone_book) {
-	sort(phone_book.begin(), phone_book.end(), compareByLength);
-	unordered_map<int, int> sortIndex;
+class Trie {
+	TrieNode* root;
+public:
+	Trie() {
+		root = new TrieNode();
+	}
 
-	for (int i = 0; i < phone_book.size(); i++)
-		sortIndex[phone_book[i].size()] = i;
-
-	auto totalLength = phone_book.size();
-	for(int i = 0 ; i < totalLength; i++) {
-		auto each = phone_book[i];
-		auto eachLength = each.size();
-
-		for (int j = sortIndex[eachLength] + 1; j < totalLength; j++) {
-			int k;
-			for (k = 0; k < eachLength; k++)
-				if (each[k] != phone_book[j][k])
-					break;
-			if (k == eachLength) return false;
+	void Insert(string data) {
+		TrieNode* current = root;
+		for (char each : data) {
+			if (current->child[each] == nullptr)
+				current->child[each] = new TrieNode();
+			current = current->child[each];
 		}
+	}
+
+	bool isPrefix(string data) {
+		TrieNode* current = root;
+		for (char each : data) {
+			current = current->child[each];
+		}
+		if (current->child.size() != 0)
+			return true;
+		else
+			return false;
+	}
+};
+
+
+bool solution(vector<string> phone_book) {
+	Trie trie;
+	for (auto eachNumber : phone_book) {
+		trie.Insert(eachNumber);
+	}
+
+	for (auto eachNumber : phone_book) {
+		if (trie.isPrefix(eachNumber))
+			return false;
 	}
 	return true;
 }
 
-int main() {
-	cout << solution_42577({ "123","1003","1010","1004","1234" });
+void main() {
+	cout << solution({ "12","123","1235","567","88" });
 }
