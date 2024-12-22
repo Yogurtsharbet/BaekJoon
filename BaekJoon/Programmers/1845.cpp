@@ -3,7 +3,7 @@
 #include <unordered_map>
 using namespace std;
 
-int solution(vector<int> nums)
+int solution_1845(vector<int> nums)
 {
     unordered_map<int, bool> isExist;
     for (int i = 0; i < nums.size(); i++) {
@@ -12,7 +12,7 @@ int solution(vector<int> nums)
     return min(isExist.size(), nums.size() / 2);
 }
 
-int main() {
-    vector<int> input = { 3, 1, 2, 3 };
-    solution(input);
-}
+//int main() {
+//    vector<int> input = { 3, 1, 2, 3 };
+//    solution(input);
+//}
