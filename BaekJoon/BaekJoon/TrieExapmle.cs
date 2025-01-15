@@ -38,7 +38,7 @@ public class Trie {
 }
 
 public class Program {
-    public static void Main(string[] args) {
+    public void Main(string[] args) {
         Trie trie = new Trie();
 
         string[] example = {  "97674223", "1195524421" ,"119" };
