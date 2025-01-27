@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F6F34411-8DD4-4C59-AFF0-250E3EBFB19A}</ProjectGuid>
+    <ProjectGuid>{4FAE1422-2ED3-46ED-AEE7-0C31ADDB77F8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>BaekJoon</RootNamespace>
     <AssemblyName>BaekJoon</AssemblyName>
@@ -36,12 +36,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="1001.cs" />
-    <Compile Include="P42860.cs" />
-    <Compile Include="TrieExapmle.cs" />
+    <Compile Include="main.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="System" />
+    <Folder Include="BaekJoon_Csharp\" />
+    <Folder Include="Programmers_Csharp\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
