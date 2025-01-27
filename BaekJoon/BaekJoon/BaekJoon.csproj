@@ -36,10 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaekJoon_Csharp\B1015.cs" />
     <Compile Include="main.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BaekJoon_Csharp\" />
     <Folder Include="Programmers_Csharp\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
