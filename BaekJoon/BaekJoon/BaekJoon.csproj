@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaekJoon_Csharp\B1003.cs" />
+    <Compile Include="BaekJoon_Csharp\B1005.cs" />
     <Compile Include="BaekJoon_Csharp\B1015.cs" />
     <Compile Include="main.cs" />
   </ItemGroup>
