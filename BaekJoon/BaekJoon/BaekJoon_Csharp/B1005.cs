@@ -18,6 +18,7 @@ public class B1005 {
     private class Node {
         public int Index;
         public int Time;
+        public bool IsVisited;
         public List<Node> Prev;
     }
 
@@ -59,51 +60,50 @@ public class B1005 {
         // target Building이 단독으로 건설할 수 있는 경우
         if (node[target].Prev.Count == 0)
             return node[target].Time;
-        
-        int[] distance = new int[node.Length];
-        bool[] visited = new bool[node.Length];
-        List<int> firstNodeIndex = new List<int>();
 
-        for (int i = 0; i < node.Length; i++) {
-            distance[i] = int.MinValue;
-            if (node[i].Prev.Count == 0)
-                firstNodeIndex.Add(i);
-        }
+        // 탐색 시작 Node 설정
+        int[] distance = new int[node.Length];
         distance[G] = node[G].Time;
 
-        // 아직 방문하지 않은 노드 중, distance 가 최소인 노드를 방문한다.
+        // 아직 방문하지 않은 노드 중, distance 가 최대인 노드를 방문한다.
         // 방문한 노드의 prev를 탐색하여, current + prev.time 을 distance 에 반영한다.
         for (int i = 0; i < node.Length; i++) {
 
-            // 최소 distance Node 탐색
+            // 최대 distance Node 탐색
             int visitIndex = 0;
-            int minDistance = int.MinValue;
+            int maxDistance = int.MinValue;
             for (int j = 0; j < distance.Length; j++) {
-                if (visited[j]) continue;
-                if (minDistance < distance[j]) {
-                    minDistance = distance[j];
+                if (node[j].IsVisited) continue;
+                if (maxDistance < distance[j]) {
+                    maxDistance = distance[j];
                     visitIndex = j;
                 }
             }
-            if (minDistance == int.MinValue) break;
+            if (maxDistance == int.MinValue) break;
 
-            // 최소 distance Node 방문
-            visited[visitIndex] = true;
-            // 최소 distance Node의 Prev 탐색
+            // 최대 distance Node 방문
+            node[visitIndex].IsVisited = true;
+
+            // 최대 distance Node의 Prev 탐색
+            int maxTime = int.MinValue;
             foreach (var each in node[visitIndex].Prev) {
-                // distance 갱신
+                // 이미 방문한 Node의 경우, 방문한 Node Distance의 최대 값을 visit Node에 더해줘야 함
+                if (each.IsVisited)
+                    maxTime = Math.Max(maxTime, distance[each.Index]);
+
+                // 방문하지 않은 Node의 경우, visit Node + each Node를 distance에 갱신
+                else
                     distance[each.Index] =
                         Math.Max(distance[each.Index], each.Time + distance[visitIndex]);
             }
+            distance[visitIndex] = Math.Max(distance[visitIndex], node[visitIndex].Time + maxTime);
 
         }
 
-        // 종단 노드 중 최소 distance 탐색
-        int result = int.MaxValue;
-        foreach (var index in firstNodeIndex) {
-            if (result > distance[index])
-                result = distance[index];
-        }
+        // 최대 distance 탐색
+        int result = int.MinValue;
+        foreach(var each in node[G].Prev) 
+            result = Math.Max(result, distance[each.Index]);
         return result;
     }
 }
